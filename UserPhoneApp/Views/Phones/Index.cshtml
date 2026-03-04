@@ -27,6 +27,7 @@ else
                 <td>@p.PhoneNumber</td>
                 <td>@(p.User?.Name ?? "-")</td>
                 <td>
+                    <a asp-action="Edit" asp-route-id="@p.Id">Edit</a> |
                     <a asp-action="Delete" asp-route-id="@p.Id">Delete</a>
                 </td>
             </tr>

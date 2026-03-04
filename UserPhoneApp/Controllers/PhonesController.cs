@@ -55,6 +55,37 @@ public class PhonesController : Controller
 
         return RedirectToAction(nameof(Index));
     }
+    
+    public async Task<IActionResult> Edit(int id)
+    {
+        var phone = await _db.Phones.FindAsync(id);
+        if (phone is null) return NotFound();
+
+        await FillUsersDropDown(phone.UserId);
+        return View(phone);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(int id, Phone phone)
+    {
+        if (id != phone.Id) return BadRequest();
+
+        if (!ModelState.IsValid)
+        {
+            await FillUsersDropDown(phone.UserId);
+            return View(phone);
+        }
+
+        var dbPhone = await _db.Phones.FindAsync(id);
+        if (dbPhone is null) return NotFound();
+
+        dbPhone.PhoneNumber = phone.PhoneNumber;
+        dbPhone.UserId = phone.UserId;
+
+        await _db.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
+    }
 
     public async Task<IActionResult> Delete(int id)
     {

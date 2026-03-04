@@ -42,8 +42,13 @@ else
         @foreach (var p in Model.Phones)
         {
             <tr>
-                <td>@p.PhoneNumber</td>
                 <td>
+                    <a asp-controller="Phones"
+                       asp-action="Edit"
+                       asp-route-id="@p.Id">
+                        Edit
+                    </a>
+                    |
                     <a class="link-danger"
                        asp-controller="Phones"
                        asp-action="Delete"
