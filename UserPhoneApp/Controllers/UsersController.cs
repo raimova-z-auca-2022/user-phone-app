@@ -41,4 +41,39 @@ public class UsersController : Controller
 
         return RedirectToAction(nameof(Index));
     }
+    
+    public async Task<IActionResult> Details(int id)
+    {
+        var user = await _db.Users
+            .AsNoTracking()
+            .FirstOrDefaultAsync(u => u.Id == id);
+
+        if (user is null) return NotFound();
+
+        return View(user);
+    }
+    
+    public async Task<IActionResult> Delete(int id)
+    {
+        var user = await _db.Users
+            .AsNoTracking()
+            .FirstOrDefaultAsync(u => u.Id == id);
+
+        if (user is null) return NotFound();
+
+        return View(user);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(int id)
+    {
+        var user = await _db.Users.FindAsync(id);
+        if (user is null) return NotFound();
+
+        _db.Users.Remove(user);
+        await _db.SaveChangesAsync();
+
+        return RedirectToAction(nameof(Index));
+    }
 }
