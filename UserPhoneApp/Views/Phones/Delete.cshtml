@@ -1,0 +1,16 @@
+@model UserPhoneApp.Models.Phone
+
+<h2>Удалить телефон</h2>
+
+<p>Ты уверена, что хочешь удалить телефон?</p>
+
+<ul>
+    <li><b>Номер:</b> @Model.PhoneNumber</li>
+    <li><b>Пользователь:</b> @(Model.User?.Name ?? "-")</li>
+</ul>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id"/>
+    <button type="submit" class="btn btn-danger">Да, удалить</button>
+    <a asp-action="Index" class="btn btn-secondary">Отмена</a>
+</form>
