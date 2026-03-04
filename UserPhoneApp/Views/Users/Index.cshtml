@@ -1,0 +1,30 @@
+@model List<UserPhoneApp.Models.User>
+
+<h2>Пользователи</h2>
+
+@if (!Model.Any())
+{
+    <p>Пока нет пользователей.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Email</th>
+            <th>Дата рождения</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var u in Model)
+        {
+            <tr>
+                <td>@u.Name</td>
+                <td>@u.Email</td>
+                <td>@(u.DateOfBirth?.ToString("yyyy-MM-dd") ?? "-")</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
