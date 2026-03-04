@@ -4,6 +4,8 @@
 
 <form asp-action="Edit" method="post">
     <input type="hidden" asp-for="Id" />
+    
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div class="mb-3">
         <label asp-for="Name" class="form-label">Имя</label>

@@ -3,9 +3,11 @@
 <h2>Добавить телефон</h2>
 
 <form asp-action="Create" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
     <div class="mb-3">
         <label asp-for="PhoneNumber" class="form-label">Номер</label>
-        <input asp-for="PhoneNumber" class="form-control"/>
+        <input asp-for="PhoneNumber" class="form-control" />
         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
     </div>
 

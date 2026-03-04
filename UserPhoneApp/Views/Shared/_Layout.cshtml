@@ -37,6 +37,10 @@
 
 <div class="container">
     <main role="main" class="pb-3">
+        @if (TempData["Success"] is string msg)
+        {
+            <div class="alert alert-success">@msg</div>
+        }
         @RenderBody()
     </main>
 </div>

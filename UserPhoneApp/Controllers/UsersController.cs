@@ -33,13 +33,20 @@ public class UsersController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(User user)
     {
-        if (!ModelState.IsValid)
+        if (!ModelState.IsValid) return View(user);
+
+        try
+        {
+            _db.Users.Add(user);
+            await _db.SaveChangesAsync();
+            TempData["Success"] = "Пользователь создан";
+            return RedirectToAction(nameof(Index));
+        }
+        catch
+        {
+            ModelState.AddModelError("", "Ошибка при сохранении. Попробуйте ещё раз.");
             return View(user);
-
-        _db.Users.Add(user);
-        await _db.SaveChangesAsync();
-
-        return RedirectToAction(nameof(Index));
+        }
     }
     
     public async Task<IActionResult> Details(int id)
