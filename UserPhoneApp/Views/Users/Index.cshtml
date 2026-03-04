@@ -33,6 +33,7 @@ else
                     <a asp-action="Details" asp-route-id="@u.Id">Details</a> |
                     <a asp-action="Edit" asp-route-id="@u.Id">Edit</a> |
                     <a asp-action="Delete" asp-route-id="@u.Id">Delete</a>
+                    <a asp-controller="Phones" asp-action="Create" asp-route-userId="@u.Id">+ phone</a>
                 </td>
             </tr>
         }

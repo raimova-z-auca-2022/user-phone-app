@@ -46,6 +46,7 @@ public class UsersController : Controller
     {
         var user = await _db.Users
             .AsNoTracking()
+            .Include(u => u.Phones)
             .FirstOrDefaultAsync(u => u.Id == id);
 
         if (user is null) return NotFound();
